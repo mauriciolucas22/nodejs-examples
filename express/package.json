@@ -1,0 +1,16 @@
+{
+  "name": "express-examples",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "start": "node app/server.js"
+  },
+  "dependencies": {
+    "cookie-parser": "^1.4.3",
+    "ejs": "^2.5.9",
+    "express": "^4.16.3",
+    "express-load": "^1.1.16",
+    "express-session": "^1.15.6"
+  }
+}
