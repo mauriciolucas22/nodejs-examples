@@ -35,15 +35,10 @@ app.use(methodOverride((req, res) => {
 
 load('controllers', { cwd: __dirname, verbose: true })
   .then('routes')
-  .into(app);
+  .into(app)
 
-io.sockets.on('connection', client => {
-  client.on('send-server', (data) => {
-    let msg = 'Jesus te ama, socket.io';
-    client.emit('send-client', msg)
-    client.broadcast.emit('send-client', msg)
-  })
-})
+load('sockets', { cwd: __dirname, verbose: true })
+  .into(io)
 
 server.listen(port, () => {
   console.log('Server listen on port 3000');
