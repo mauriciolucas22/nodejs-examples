@@ -6,6 +6,8 @@ const session = require('express-session')
 const methodOverride = require('method-override')
 const error = require('./middleware/error')
 const app = express();
+const server = require('http').createServer(app);
+const io = require('socket.io').listen(server);
 const port = 3000;
 
 app.set('views', __dirname + '/views'); // model files and assign setting name to value
@@ -35,7 +37,15 @@ load('controllers', { cwd: __dirname, verbose: true })
   .then('routes')
   .into(app);
 
-app.listen(port, () => {
+io.sockets.on('connection', client => {
+  client.on('send-server', (data) => {
+    let msg = 'Jesus te ama, socket.io';
+    client.emit('send-client', msg)
+    client.broadcast.emit('send-client', msg)
+  })
+})
+
+server.listen(port, () => {
   console.log('Server listen on port 3000');
 })
 
